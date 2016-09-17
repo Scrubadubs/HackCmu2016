@@ -25,14 +25,6 @@ app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 messageDict = {}
 counter = 0
 
-#define views
-@app.route("/receivePage")
-def receivePage():
-    if 'logged_in_user' in session:
-        return render_template('receivePage.html', name=session['logged_in_user'])
-    else:
-        return redirect(url_for('login'))
-
 @app.route("/inputPage", methods=['GET', 'POST'])
 def inputPage():
     global messageList
@@ -48,14 +40,16 @@ def inputPage():
                 "long": request.form['gpsLong']
             }
             counter += 1
+            return redirect('/')
     return render_template('inputPage.html')
 
-@app.route("/")
+@app.route('/')
 def messages():
-    if messageDict:
-        return render_template('messages.html', items=OrderedDict(sorted(messageDict.items(), key = lambda x: x[0], reverse=True)), name=session['logged_in_user'])
+    if 'logged_in_user' in session:
+        return render_template('messages.html', items=OrderedDict(sorted(messageDict.items(), 
+                               key = lambda x: x[0], reverse=True)), name=session['logged_in_user'])
     else:
-        return render_template('messages.html', items={}, name=session['logged_in_user'])
+        return redirect(url_for('login'))
 
 #check the login form username and password against the hardcoded stuff
 @app.route('/login', methods=['GET', 'POST'])
@@ -69,14 +63,14 @@ def login():
         else:
             session['logged_in_user'] = request.form['username']
             flash('You were logged in')
-            return redirect(url_for('receivePage'))
+            return redirect(url_for('messages'))
     return render_template('login.html', error=error)
 
 @app.route('/logout')
 def logout():
     session.pop('logged_in_user', None)
     flash('You were logged out')
-    return redirect(url_for('receivePage'))
+    return redirect(url_for('messages'))
 
 if __name__ == '__main__':
     context = ('server.crt', 'server.key')
