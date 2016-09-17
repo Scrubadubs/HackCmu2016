@@ -35,7 +35,6 @@ def receivePage():
 def inputPage():
     global messageList
     global counter
-    error = None
     if request.method == 'POST':
         if 'title' in request.form and 'desc' in request.form and 'rad' in request.form:
             messageDict[counter] = {
@@ -45,9 +44,7 @@ def inputPage():
                 "user": session['logged_in_user']
             }
             counter += 1
-        else:
-            error = 'Form not filled completely'
-    return render_template('inputPage.html', error=error)
+    return render_template('inputPage.html')
 
 @app.route("/messages")
 def messages():
