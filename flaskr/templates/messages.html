@@ -17,39 +17,31 @@
 	  	</nav>
 	  	<div class="section no-pad-bot" id="index-banner">
 			<div class="container">
-		  		<h2 class="center-align">Welcome, {{name}}</h2>
-				
+		  		<h4 class="center-align">Welcome, {{name}}</h4>
 			</div>
 	  	</div>
 		<div id="messages">
-			{% for item in items.itervalues() %}
-			<div class="card horizontal grey lighten-5">
-				<br>
-				<div class="card-image">
-					<img width="120" src="http://maps.googleapis.com/maps/api/staticmap?center={{item.lat}},{{item.long}}&zoom=16&scale=2&size=100x160&maptype=roadmap&format=png&visual_refresh=true&markers=color:red%7Clabel:%7C40.443315,-79.944547" alt="" class="circle">
-				</div>
-				<div class="col s10">
-					<div class="card-stacked">
-						<div class="card-content">
-							<div class="row">
-								<div class="col s6">
-									<p style="font-size: 2.9em">{{item.title}}</p>
-								</div>
-								<div class="col s1 offset-s1">
-									<i class="material-icons medium">play_arrow</i>
-								</div>
-							</div>
-						</div>
-						<div class="card-action">
-							<span class="flow-text">{{item.desc}}</span>
-							<br>
-							<br>
-							<h6>{{item.user}}</h6>
-						</div>
+			<div class="row">
+				<div class="container">
+					{% for item in items.itervalues() %}
+					<div class="col m4 s12">
+						<div class="card">
+			    				<div class="card-image waves-effect waves-block waves-light">
+			      					<img class="activator" src="http://maps.googleapis.com/maps/api/staticmap?center={{item.lat}},{{item.long}}&zoom=17&scale=2&size=400x350&maptype=roadmap&format=png&visual_refresh=true&markers=color:red%7Clabel:%7C{{item.lat}},{{item.long}}">
+			   				</div>
+			    				<div class="card-content">
+			      					<span class="card-title activator grey-text text-darken-4">{{item.title}}<i class="material-icons right">more_vert</i></span>
+			      					<p><a href="#"></a></p>
+			    				</div>
+			   				<div class="card-reveal">
+			      					<span class="card-title grey-text text-darken-4">{{item.title}}<i class="material-icons right">close</i></span>
+			      					<p>{{item.desc}}</p>
+			    				</div>
+			  			</div>
 					</div>
+					{% endfor %}	
 				</div>
-			</div>
-			{% endfor %}			
+			</div>		
 		</div>
 		<!--
 	  	<footer class="page-footer orange">
