@@ -19,6 +19,9 @@ app.config.update(dict(
 ))
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
+#lul we lazy
+messages = []
+
 #define views
 @app.route("/")
 def receivePage():
@@ -27,9 +30,19 @@ def receivePage():
     else:
         return redirect(url_for('login'))
 
-@app.route("/input")
+@app.route("/inputPage", methods=['GET', 'POST'])
 def inputPage():
-    return render_template('inputPage.html')
+    global messages
+    error = None
+    if request.method == 'POST':
+        if 'title' in request.form and 'desc' in request.form and 'rad' in request.form:
+            if messages:
+                messages.append(request.form['title'])
+            else:
+                messages = [request.form['title']]
+        else:
+            error = 'Form not filled completely'
+    return render_template('inputPage.html', error=error)
 
 #check the login form username and password against the hardcoded stuff
 @app.route('/login', methods=['GET', 'POST'])
