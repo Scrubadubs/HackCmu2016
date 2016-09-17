@@ -1,5 +1,108 @@
-<div class=page>
-{% for item in items.itervalues() %}
-{{item.title}} {{item.desc}} {{item.rad}} {{item.user}}
-{% endfor %}
-</div>
+<!doctype html>
+	<head>
+		<title>Input</title>
+		<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/materialize.css') }}" media="screen,projection"/>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/materialize.js') }}"></script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/init.js') }}"></script>
+	</head>
+
+	<body>
+		<nav class=" teal darken-1" role="navigation">
+			<div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Tagger</a>
+		  		<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+			</div>
+	  	</nav>
+	  	<div class="section no-pad-bot" id="index-banner">
+			<div class="container">
+		  		<h2 class="center-align">Welcome, {{name}}</h2>
+				
+			</div>
+	  	</div>
+		<div id="messages">
+			{% for item in items.itervalues() %}
+			<div class="card horizontal grey lighten-5">
+				<br>
+				<div class="card-image">
+					<img width="120" src="http://maps.googleapis.com/maps/api/staticmap?center=40.443315,-79.944547&zoom=16&scale=2&size=100x160&maptype=roadmap&format=png&visual_refresh=true&markers=color:red%7Clabel:%7C40.443315,-79.944547" alt="" class="circle">
+				</div>
+				<div class="col s10">
+					<div class="card-stacked">
+						<div class="card-content">
+							<div class="row">
+								<div class="col s6">
+									<p style="font-size: 2.9em">{{item.title}}</p>
+								</div>
+								<div class="col s1 offset-s1">
+									<i class="material-icons medium">play_arrow</i>
+								</div>
+							</div>
+						</div>
+						<div class="card-action">
+							<span class="flow-text">{{item.desc}}</span>
+							<br>
+							<br>
+							<h6>{{item.user}}</h6>
+						</div>
+					</div>
+				</div>
+			</div>
+			{{item.title}} {{item.desc}} {{item.rad}} {{item.user}}
+			{% endfor %}			
+		</div>
+		<!--
+	  	<footer class="page-footer orange">
+	   		<div class="container">
+				Made for <a class="center-align orange-text text-lighten-3" href="http://2016.hackcmu.com">Hack CMU 2016</a>
+			</div>
+	  	</footer>
+		-->
+	</body>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.button-collapse').sideNav();
+		});
+	</script>
+</html> 
+
+
+<p id="location"></p>
+<input type="button" onclick="tryOk()" value="get location" class="btn-large waves-effect waves-light orange"/>
+<script type="text/javascript">
+	var x = document.getElementById("location");
+	function tryOk() {
+	  console.log("button was pressed");
+	  if ("geolocation" in navigator) {
+	    x.innerHTML = "wow";
+	    navigator['geolocation'].getCurrentPosition(showPosition, showError);
+	  }
+	  else {
+	    x.innerHTML = "rip";
+	  }
+	}
+
+	function showPosition(position) {
+	  x.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
+	}
+
+	function showError(error) {
+	    switch(error.code) {
+		case error.PERMISSION_DENIED:
+		    x.innerHTML = "User denied the request for Geolocation."
+		    break;
+		case error.POSITION_UNAVAILABLE:
+		    x.innerHTML = "Location information is unavailable."
+		    break;
+		case error.TIMEOUT:
+		    x.innerHTML = "The request to get user location timed out."
+		    break;
+		case error.UNKNOWN_ERROR:
+		    x.innerHTML = "An unknown error occurred."
+		    break;
+	    }
+	}
+
+</script>
+
