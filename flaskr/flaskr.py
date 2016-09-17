@@ -3,7 +3,6 @@ import os
 from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
 
-=======
 #from OpenSSL import SSL
 #context = SSL.Context(SSL.SSLv23_METHOD)
 #context.use_privatekey_file('server.key')
