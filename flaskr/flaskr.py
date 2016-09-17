@@ -23,10 +23,6 @@ app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 @app.route("/")
 def receivePage():
     if 'logged_in_user' in session:
-
-
-
-
         return render_template('receivePage.html', a=session['logged_in_user'])
     else:
         return redirect(url_for('login'))
