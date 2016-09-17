@@ -23,18 +23,13 @@ app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 @app.route("/")
 def receivePage():
     if 'logged_in_user' in session:
-        return render_template('receivePage.html', a=session['logged_in_user'])
+        return render_template('receivePage.html', name=session['logged_in_user'])
     else:
         return redirect(url_for('login'))
 
 @app.route("/input")
 def inputPage():
     return render_template('inputPage.html')
-
-if __name__ == '__main__':
-    context = ('server.crt', 'server.key')
-    app.run(ssl_context=context, threaded=True, debug=True)
-
 
 #check the login form username and password against the hardcoded stuff
 @app.route('/login', methods=['GET', 'POST'])
@@ -56,3 +51,7 @@ def logout():
     session.pop('logged_in_user', None)
     flash('You were logged out')
     return redirect(url_for('receivePage'))
+
+if __name__ == '__main__':
+    context = ('server.crt', 'server.key')
+    app.run(ssl_context=context, threaded=True, debug=True)
