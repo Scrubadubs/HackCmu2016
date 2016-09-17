@@ -22,10 +22,14 @@ app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 #define views
 @app.route("/")
 def receivePage():
-	if (session['logged_in']):
-		return render_template('receivePage.html', a="asdf")
-	else:
-		return redirect(url_for('login'))
+    if 'logged_in_user' in session:
+
+
+
+
+        return render_template('receivePage.html', a=session['logged_in_user'])
+    else:
+        return redirect(url_for('login'))
 
 @app.route("/input")
 def inputPage():
@@ -46,13 +50,13 @@ def login():
         elif request.form['password'] != app.config['PASSWORD']:
             error = 'Invalid password'
         else:
-            session['logged_in'] = True
+            session['logged_in_user'] = request.form['username']
             flash('You were logged in')
             return redirect(url_for('receivePage'))
     return render_template('login.html', error=error)
 
 @app.route('/logout')
 def logout():
-    session.pop('logged_in', None)
+    session.pop('logged_in_user', None)
     flash('You were logged out')
     return redirect(url_for('receivePage'))
