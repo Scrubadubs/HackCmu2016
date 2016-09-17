@@ -31,11 +31,6 @@ def receivePage():
 def inputPage():
     return render_template('inputPage.html')
 
-if __name__ == '__main__':
-    context = ('server.crt', 'server.key')
-    app.run(ssl_context=context, threaded=True, debug=True)
-
-
 #check the login form username and password against the hardcoded stuff
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -56,3 +51,7 @@ def logout():
     session.pop('logged_in_user', None)
     flash('You were logged out')
     return redirect(url_for('receivePage'))
+
+if __name__ == '__main__':
+    context = ('server.crt', 'server.key')
+    app.run(ssl_context=context, threaded=True, debug=True)
