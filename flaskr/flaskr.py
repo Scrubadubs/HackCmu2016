@@ -41,7 +41,9 @@ def inputPage():
                 "title": request.form['title'],
                 "desc": request.form['desc'],
                 "rad": request.form['rad'],
-                "user": session['logged_in_user']
+                "user": session['logged_in_user'],
+                "lat": request.form['gpsLat'],
+                "long": request.form['gpsLong']
             }
             counter += 1
     return render_template('inputPage.html')

@@ -36,7 +36,11 @@
 
 									<div class="input-field col s12">
 							  			<input id="Description" type="text" class="validate" name=desc>
-							 			 <label for="Description">Description</label>
+							 			<label for="Description">Description</label>
+									</div>
+									<div class="input-field col s12">
+										<input id="GPSLat" type="hidden" name=gpsLat>
+										<input id="GPSLong" type="hidden" name=gpsLong>
 									</div>
 								</div>
 								<h6 class="grey-text">Radius (meters)</h6>
@@ -74,6 +78,45 @@
 	  	</footer>
 		-->
 	</body>
+
+	<script type="text/javascript">
+		var x = document.getElementById("GPSLat")
+		var y = document.getElementById("GPSLong")
+		function getLocation() {
+		  console.log("button was pressed");
+		  if ("geolocation" in navigator) {
+		    navigator['geolocation'].getCurrentPosition(showPosition, showError);
+		  }
+		  else {
+		    x.value = "rip";
+		    y.value = "rip";
+		  }
+		}
+
+		function showPosition(position) {
+		  x.value = position.coords.latitude
+		  y.value = position.coords.longitude;
+		}
+
+		function showError(error) {
+		    switch(error.code) {
+			case error.PERMISSION_DENIED:
+			    x.value = "User denied the request for Geolocation."
+			    break;
+			case error.POSITION_UNAVAILABLE:
+			    x.value = "Location information is unavailable."
+			    break;
+			case error.TIMEOUT:
+			    x.value = "The request to get user location timed out."
+			    break;
+			case error.UNKNOWN_ERROR:
+			    x.value = "An unknown error occurred."
+			    break;
+		    }
+		}
+		getLocation()
+	</script>
+
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('.button-collapse').sideNav();
