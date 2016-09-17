@@ -3,6 +3,8 @@ import os
 from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
 
+from collections import OrderedDict
+
 #from OpenSSL import SSL
 #context = SSL.Context(SSL.SSLv23_METHOD)
 #context.use_privatekey_file('server.key')
@@ -51,9 +53,9 @@ def inputPage():
 @app.route("/messages")
 def messages():
     if messageDict:
-        return render_template('messages.html', items=messageDict)
+        return render_template('messages.html', items=OrderedDict(sorted(messageDict.items(), key = lambda x: x[0], reverse=True)), name=session['logged_in_user'])
     else:
-        return render_template('messages.html', items={})
+        return render_template('messages.html', items={}, name=session['logged_in_user'])
 
 #check the login form username and password against the hardcoded stuff
 @app.route('/login', methods=['GET', 'POST'])
