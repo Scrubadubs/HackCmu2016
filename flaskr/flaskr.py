@@ -1,8 +1,13 @@
-#import os
+import os
+
 from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
 
-from flask.ext.login import LoginManager, UserMixin, login_required
+=======
+#from OpenSSL import SSL
+#context = SSL.Context(SSL.SSLv23_METHOD)
+#context.use_privatekey_file('server.key')
+#context.use_certificate_file('server.crt')
 
 app = Flask(__name__)
 
@@ -22,6 +27,15 @@ def receivePage():
 		return render_template('receivePage.html', a="asdf")
 	else:
 		return redirect(url_for('login'))
+
+@app.route("/input")
+def inputPage():
+    return render_template('inputPage.html')
+
+if __name__ == '__main__':
+    context = ('server.crt', 'server.key')
+    app.run(ssl_context=context, threaded=True, debug=True)
+
 
 #check the login form username and password against the hardcoded stuff
 @app.route('/login', methods=['GET', 'POST'])
@@ -43,26 +57,3 @@ def logout():
     session.pop('logged_in', None)
     flash('You were logged out')
     return redirect(url_for('receivePage'))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@app.route("/input")
-def inputPage():
-	return render_template('inputPage.html')
