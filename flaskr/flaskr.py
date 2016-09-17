@@ -16,7 +16,7 @@ app.config.from_object(__name__)
 
 app.config.update(dict(
     SECRET_KEY='development key',
-    USERNAME='admin',
+    USERNAME='richard',
     PASSWORD='default'
 ))
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)
