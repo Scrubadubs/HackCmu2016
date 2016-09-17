@@ -1,3 +1,52 @@
+<!doctype html>
+	<head>
+		<title>Tags</title>
+		<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/materialize.css') }}" media="screen,projection"/>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<script type="text/rocketscript" data-rocketsrc="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script type="text/rocketscript" data-rocketsrc="{{ url_for('static', filename='js/materialize.js') }}"></script>
+		<script type="text/rocketscript" data-rocketsrc="{{ url_for('static', filename='js/init.js') }}"></script>
+	</head>
 
+	<body>
+		<nav class=" teal darken-1" role="navigation">
+			<div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Tagger</a>
+		  		<ul class="right hide-on-med-and-down">
+		    		<li><a href="#">Navbar Link</a></li>
+		  		</ul>
 
-{{a}}
+		  		<ul id="nav-mobile" class="side-nav">
+		    		<li><a href="#">Navbar Link</a></li>
+		  		</ul>
+		  		<a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+			</div>
+	  	</nav>
+	  	<div class="section no-pad-bot" id="index-banner">
+			<div class="container">
+		  		<br><br>
+		  		<h1 class="header center orange-text">Starter Template</h1>
+		  		<div class="row center">
+		    		<h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+		  		</div>
+		  		<div class="row center">
+		   			<a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light orange">Get Started</a>
+				</div>
+				<br><br>
+			</div>
+	  	</div>
+		<!--
+	  	<footer class="page-footer orange">
+	   		<div class="container">
+				Made for <a class="center-align orange-text text-lighten-3" href="http://2016.hackcmu.com">Hack CMU 2016</a>
+			</div>
+	  	</footer>
+		-->
+	</body>
+	<script type="text/rocketscript">
+		$(document).ready(function(){
+			$('.button-collapse').sideNav();
+		});
+	</script>
+</html>
+{{ a }}
