@@ -26,7 +26,7 @@ messageDict = {}
 counter = 0
 
 #define views
-@app.route("/")
+@app.route("/receivePage")
 def receivePage():
     if 'logged_in_user' in session:
         return render_template('receivePage.html', name=session['logged_in_user'])
@@ -50,7 +50,7 @@ def inputPage():
             counter += 1
     return render_template('inputPage.html')
 
-@app.route("/messages")
+@app.route("/")
 def messages():
     if messageDict:
         return render_template('messages.html', items=OrderedDict(sorted(messageDict.items(), key = lambda x: x[0], reverse=True)), name=session['logged_in_user'])

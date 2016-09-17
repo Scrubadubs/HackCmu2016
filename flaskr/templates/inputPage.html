@@ -64,7 +64,7 @@
 				</div>
 				<div class="card">
 					<div class="card-image">
-						<img width="600" id="mapPreview">
+						<img width="600" id="mapPreview" src="http://maps.googleapis.com/maps/api/staticmap?center=40.443315,-79.944547&zoom=16&scale=2&size=600x500&maptype=roadmap&format=png&visual_refresh=true&markers=color:red%7Clabel:%7C40.443315,-79.944547">
 						<!--<span class="card-title">Preview</span>-->
 					</div>
 				</div>
@@ -94,8 +94,12 @@
 		}
 
 		function showPosition(position) {
-		  x.value = position.coords.latitude
+		  x.value = position.coords.latitude;
 		  y.value = position.coords.longitude;
+
+		  //yeah...
+		  var s = "http://maps.googleapis.com/maps/api/staticmap?center=" + x.value + "," + y.value + "&zoom=16&scale=2&size=600x500&maptype=roadmap&format=png&visual_refresh=true&markers=color:red%7Clabel:%7C" + x.value + "," + y.value
+		  document.getElementById("mapPreview").src = s
 		}
 
 		function showError(error) {
@@ -115,19 +119,6 @@
 		    }
 		}
 		getLocation()
-	</script>
-
-	<script type="text/javascript">
-		function getLink() {
-			var s = "http://maps.googleapis.com/maps/api/staticmap?center="
-			s = x.value
-			s += ", "
-			s += y.value
-			s += "&zoom=16&scale=2&size=600x500&maptype=roadmap&format=png&visual_refresh=true&markers=color:red%7Clabel:%7C"
-			s += x.value
-			s += y.value
-			document.getElementById("mapPreview").src = s;
-		}
 	</script>
 
 	<script type="text/javascript">
