@@ -87,10 +87,10 @@
 </html> 
 
 
-<p id="demo"></p>
-<input type="button" onclick="tryOk()" value="try" class="btn-large waves-effect waves-light orange"/>
+<p id="location"></p>
+<input type="button" onclick="tryOk()" value="get location" class="btn-large waves-effect waves-light orange"/>
 <script type="text/javascript">
-	var x = document.getElementById("demo");
+	var x = document.getElementById("location");
 	function tryOk() {
 	  console.log("button was pressed");
 	  if ("geolocation" in navigator) {
@@ -103,7 +103,7 @@
 	}
 
 	function showPosition(position) {
-	  document.getElementById("demo").innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
+	  x.innerHTML = "Latitude: " + position.coords.latitude + "<br>Longitude: " + position.coords.longitude;
 	}
 
 	function showError(error) {
